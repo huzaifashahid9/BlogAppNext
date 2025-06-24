@@ -1,66 +1,44 @@
 import { blog_data } from "@/Assets/assets";
-import React from "react";
+import React, { useState } from "react";
 import Blogitems from "./Blogitems";
-import { useState } from "react";
+import "animate.css"; // ✅ Animate.css import
 
 const BlogList = () => {
   const [menu, setMenu] = useState("All");
 
+  const categories = ["All", "Technology", "Startup", "Lifestyle"];
+
   return (
-    <div>
-      <div className="flex justify-center gap-6 my-10">
-        <button
-          onClick={() => setMenu("All")}
-          className={
-            menu === "All"
-              ? "bg-black text-white py-1 px-4 rounded-sm"
-              : "py-1 px-4 rounded-sm"
-          }
-        >
-          All
-        </button>
-        <button
-          onClick={() => setMenu("Technology")}
-          className={
-            menu === "Technology"
-              ? "bg-black text-white py-1 px-4 rounded-sm"
-              : "py-1 px-4 rounded-sm"
-          }
-        >
-          Technology
-        </button>
-        <button
-          onClick={() => setMenu("Startup")}
-          className={
-            menu === "Startup"
-              ? "bg-black text-white py-1 px-4 rounded-sm"
-              : "py-1 px-4 rounded-sm"
-          }
-        >
-          Startup
-        </button>
-        <button
-          onClick={() => setMenu("Lifestyle")}
-          className={
-            menu === "Lifestyle"
-              ? "bg-black text-white py-1 px-4 rounded-sm"
-              : "py-1 px-4 rounded-sm"
-          }
-        >
-          Lifestyle
-        </button>
+    <div className="animate__animated animate__fadeIn">
+      {/* Filter Buttons */}
+      <div className="flex flex-wrap justify-center gap-4 my-10">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setMenu(cat)}
+            className={`py-2 px-5 rounded-full text-sm font-medium border border-black transition-all duration-300 
+              ${menu === cat ? "bg-black text-white shadow-md" : "bg-white text-black hover:bg-black hover:text-white"}`}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
-      <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24">
-        {blog_data.filter((item)=> menu === "All" ?true : item.category===menu).map((item, index) => (
-          <Blogitems
-            key={index}
-            title={item.title}
-            description={item.description}
-            category={item.category}
-            image={item.image}
-          />
-        ))}
+      {/* Blog Cards */}
+      <div className="flex flex-wrap justify-around gap-4 gap-y-10 mb-16 xl:mx-24">
+        {blog_data
+          .filter((item) => (menu === "All" ? true : item.category === menu))
+          .map((item, index) => (
+            <div key={index} className="animate__animated animate__fadeInUp">
+              <Blogitems
+                id={item.id}
+                title={item.title}
+                description={item.description}
+                category={item.category}
+                image={item.image}
+              />
+            </div>
+          ))}
       </div>
     </div>
   );
