@@ -1,11 +1,23 @@
+'use client'
 import { assets } from "@/Assets/assets";
 import Image from "next/image";
-import React from "react";
-import "animate.css";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Footer = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  }, []);
+
   return (
-    <div className="flex justify-around flex-col gap-4 sm:gap-0 sm:flex-row bg-black py-6 items-center animate__animated animate__fadeInUp">
+    <div
+      className="flex justify-around flex-col gap-4 sm:gap-0 sm:flex-row bg-black py-6 items-center"
+      data-aos="fade-up"
+    >
       {/* Logo */}
       <Image
         src={assets.logo_light}
@@ -34,21 +46,36 @@ const Footer = () => {
           href="https://www.facebook.com/m.huzaifa.587297/"
           className="transition-transform duration-300 hover:scale-110"
         >
-          <Image src={assets.facebook_icon} alt="facebook" width={40} height={30} />
+          <Image
+            src={assets.facebook_icon}
+            alt="facebook"
+            width={40}
+            height={30}
+          />
         </a>
         <a
           target="_blank"
           href="https://www.huzaifashahid.xyz"
           className="transition-transform duration-300 hover:scale-110"
         >
-          <Image src={assets.twitter_icon} alt="website" width={40} height={30} />
+          <Image
+            src={assets.twitter_icon}
+            alt="website"
+            width={40}
+            height={30}
+          />
         </a>
         <a
           target="_blank"
           href="https://www.linkedin.com/in/huzaifashahid9"
           className="transition-transform duration-300 hover:scale-110"
         >
-          <Image src={assets.googleplus_icon} alt="linkedin" width={40} height={30} />
+          <Image
+            src={assets.googleplus_icon}
+            alt="linkedin"
+            width={40}
+            height={30}
+          />
         </a>
       </div>
     </div>
